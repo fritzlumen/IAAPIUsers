@@ -1,6 +1,8 @@
 ﻿using IAAPIUsers.Data;
 using IAAPIUsers.Models;
+using IAAPIUsers.Services;
 using IAAPIUsers.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
@@ -47,9 +49,10 @@ namespace IAAPIUsers.Controller
 
             var user = new User
             {
-                Name = modelUser.Name,
+                Username = modelUser.Username,
                 Age = modelUser.Age,
-                Password = modelUser.Password
+                Password = modelUser.Password,
+                Role = modelUser.Role
             };
 
             try
@@ -82,9 +85,10 @@ namespace IAAPIUsers.Controller
 
             try
             {
-                user.Name = modelUser.Name;
+                user.Username = modelUser.Username;
                 user.Age = modelUser.Age;
                 user.Password = modelUser.Password;
+                user.Role = modelUser.Role;
 
                 context.Users.Update(user);
                 await context.SaveChangesAsync();
@@ -121,5 +125,46 @@ namespace IAAPIUsers.Controller
             }
         }
 
+        [HttpPost("login")]
+        public async Task<ActionResult<dynamic>> AuthenticateAsync(
+            [FromServices] AppDbContext context, 
+            [FromBody] GetUserViewModel model)
+        {
+            var user = await context
+                .Users
+                .AsNoTracking()
+                .FirstOrDefaultAsync(u => 
+                u.Username.ToLower() == model.Username.ToLower() && 
+                u.Password == model.Password.ToLower());
+
+            if (user == null)
+                return NotFound(new { message = "Usuário ou senha inválidos" });
+
+            var token = TokenService.GenerateToken(user);
+
+            user.Password = "";
+
+            return new
+            {
+                user = user,
+                token = token
+            };
+        }
+
+        [HttpGet("anonymous")]
+        [AllowAnonymous]
+        public string Anonymous() => "Anônimo";
+
+        [HttpGet("authenticated")]
+        [Authorize]
+        public string Authenticated() => $"Autenticado - {User.Identity.Name}";
+
+        [HttpGet("employee")]
+        [Authorize(Roles = "employee,manager")]
+        public string Employee() => "Funcionário";
+
+        [HttpGet("manager")]
+        [Authorize(Roles = "manager")]
+        public string Manager() => "Gerente";
     }
 }

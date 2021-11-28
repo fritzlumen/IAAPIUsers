@@ -8,6 +8,7 @@ C:\dev\IAAPIUsers\bin\Debug\net5.0\IAAPIUsers.dll
 C:\dev\IAAPIUsers\bin\Debug\net5.0\ref\IAAPIUsers.dll
 C:\dev\IAAPIUsers\bin\Debug\net5.0\IAAPIUsers.pdb
 C:\dev\IAAPIUsers\bin\Debug\net5.0\Humanizer.dll
+C:\dev\IAAPIUsers\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\dev\IAAPIUsers\bin\Debug\net5.0\Microsoft.Data.SqlClient.dll
 C:\dev\IAAPIUsers\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.dll
 C:\dev\IAAPIUsers\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
@@ -21,7 +22,6 @@ C:\dev\IAAPIUsers\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
 C:\dev\IAAPIUsers\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
 C:\dev\IAAPIUsers\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\dev\IAAPIUsers\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
-C:\dev\IAAPIUsers\bin\Debug\net5.0\Newtonsoft.Json.dll
 C:\dev\IAAPIUsers\bin\Debug\net5.0\System.Configuration.ConfigurationManager.dll
 C:\dev\IAAPIUsers\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
 C:\dev\IAAPIUsers\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
